@@ -29,7 +29,11 @@ router.patch('/items/:name', (req, res) => {
 // DELETE /items/:name - remove item by name
 router.delete('/items/:name', (req, res) => {
   const result = db.removeItemByName(req.params.name);
-  res.json(result);
+  if (result) {
+    res.json({ message: 'Deleted' });
+  } else {
+    res.json({ message: 'Delete failed' });
+  }
 });
 
 module.exports = router;

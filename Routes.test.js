@@ -92,14 +92,14 @@ describe('DELETE /items/:name', () => {
 
     const res = await request(app).delete('/items/Apple');
     expect(res.status).toBe(200);
-    expect(res.body).toBe(true);
+    expect(res.body).toEqual({ message: 'Deleted' });
     expect(db.getItems()).toHaveLength(1);
     expect(db.getItemByName('Apple')).toBeUndefined();
   });
 
-  test('returns false when the item does not exist', async () => {
+  test('returns Delete failed when the item does not exist', async () => {
     const res = await request(app).delete('/items/Orange');
     expect(res.status).toBe(200);
-    expect(res.body).toBe(false);
+    expect(res.body).toEqual({ message: 'Delete failed' });
   });
 });
